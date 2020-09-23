@@ -5,7 +5,7 @@ class ImplemetesHomeRepository implements HomeRepository {
   @override
   Future<List<dynamic>> getApiRest() async {
     final response =
-        await Dio().get('https://jsonplaceholder.typicode.com/comments');
+        await Dio().get('https://igti-film.herokuapp.com/api/accounts');
     return response.data;
   }
 }

@@ -20,12 +20,54 @@ class _HomePageState extends State<HomePage> {
             if (snashot.hasError) {
               return Text("Aconteceu um error");
             } else if (snashot.hasData) {
-              final list = snashot.data;
               return ListView.builder(
-                itemCount: list.length,
-                itemBuilder: (context, index) => ListTile(
-                  title: Text(list[index]['name']),
-                ),
+                itemCount: snashot.data.length,
+                itemBuilder: (context, index) {
+                  final list = snashot.data[index];
+                  return Card(
+                    elevation: 5,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                list['name'],
+                                style: TextStyle(
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text('Agencia: ${list['agencia']}'),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  Text('Conta: ${list['conta']}'),
+                                ],
+                              ),
+                            ],
+                          ),
+                          CircleAvatar(
+                            radius: 38,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('R\$${list['balance']}'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
               );
             } else {
               return Center(
